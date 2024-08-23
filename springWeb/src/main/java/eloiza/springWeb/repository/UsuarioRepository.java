@@ -5,11 +5,18 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import eloiza.springWeb.handler.CampoObrigatorioException;
 import eloiza.springWeb.model.Usuario;
 
 @Repository
 public class UsuarioRepository {
 	public void save(Usuario user) {
+		if(user.getLogin()==null) {
+			throw new CampoObrigatorioException("login");
+		}
+		if(user.getPassword()==null) {
+			throw new CampoObrigatorioException("password");
+		}
 		if(user.getId()==null)
 			System.out.println("SAVE - Recebendo o usuário da camada de repositório");
 		else
